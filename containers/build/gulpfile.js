@@ -3,9 +3,16 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 var plumber = require('gulp-plumber');
+var sourcemaps = require('gulp-sourcemaps');
 
-var onError = function (err) {
-  console.log(err.toString());
+var onError = function (error) {
+
+	var message = '<div style="text-align:left;"><div style="font-weight:bold;">TASK FAILED [' + error.plugin + ']</div>' +
+								'<div>' + error.relativePath + ' : ' + error.line + '</div>' +
+								'<div>' + error.messageOriginal + '</div></div>';
+
+	console.log(error.toString());
+	browserSync.notify(message, 10000);
 	this.emit('end');
 };
 
@@ -14,10 +21,12 @@ gulp.task('scss', function() {
 	  .pipe(plumber({
 		  errorHandler: onError
 	  }))
-		.pipe(sass({ errLogToConsole: true }))
+		.pipe(sourcemaps.init())
+		.pipe(sass({ errLogToConsole: true, outputStyle: 'compressed' }))
 		.pipe(autoprefixer())
+		.pipe(sourcemaps.write('./maps'))
 		.pipe(gulp.dest('src/css'))
-		.pipe(browserSync.stream());
+		.pipe(browserSync.stream({match: "**/*.css"}));
 });
 
 gulp.task('watch', ['browser-sync'], function() {
