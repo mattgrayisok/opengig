@@ -1,4 +1,4 @@
-OpenGig
+# OpenGig
 
 `docker-compose up -d` <-- Create containers and start them
 

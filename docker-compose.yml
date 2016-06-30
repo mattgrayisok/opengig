@@ -55,4 +55,4 @@ buildchain:
     links:
         - nginx
     volumes:
-        - .:/project
+        - ./src:/project/src
