@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTracksTable extends Migration
+class CreateModificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,14 @@ class CreateTracksTable extends Migration
      */
     public function up()
     {
-      Schema::create('tracks', function(Blueprint $table){
+      Schema::create('modifications', function(Blueprint $table){
 
         $table->increments('id');
-        $table->string('name');
-        $table->string('artist')->nullable();
-        $table->boolean('is_cover')->default(false);
+        $table->integer('up_votes');
+        $table->integer('down_votes');
+        $table->text('description');
+        $table->timestamp('first_vote');
+        $table->timestamps();
 
       });
     }
@@ -29,6 +31,6 @@ class CreateTracksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('tracks');
+      Schema::drop('modifications');
     }
 }

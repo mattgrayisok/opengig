@@ -15,6 +15,7 @@ class CreateArtistsTable extends Migration
         Schema::create('artists', function(Blueprint $table){
 
           $table->increments('id');
+          $table->uuid('uuid')->index();
           $table->string('name');
 
         });

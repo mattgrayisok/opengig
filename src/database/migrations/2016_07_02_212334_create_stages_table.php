@@ -15,6 +15,7 @@ class CreateStagesTable extends Migration
       Schema::create('stages', function(Blueprint $table){
 
         $table->increments('id');
+        $table->uuid('uuid')->index();
         $table->integer('venue_id')->unsigned();
         $table->string('name');
 

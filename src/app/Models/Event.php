@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\UuidModel;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+
+    use UuidModel;
 
     protected $fillable = [
         'name', 'start_timestamp', 'end_timestamp'

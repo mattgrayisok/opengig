@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\UuidModel;
 use Illuminate\Database\Eloquent\Model;
 
 class Set extends Model
 {
+
+    use UuidModel;
 
     protected $fillable = [
         'is_headline', 'start_timestamp', 'end_timestamp'
@@ -21,11 +24,6 @@ class Set extends Model
 
     public function stage(){
       return $this->belongsTo('App\Models\Stage');
-    }
-
-    public function tracks()
-    {
-        return $this->belongsToMany('App\Models\Track');
     }
 
 }
