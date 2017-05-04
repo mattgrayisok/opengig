@@ -15,10 +15,8 @@ class CreateModificationsTable extends Migration
       Schema::create('modifications', function(Blueprint $table){
 
         $table->increments('id');
-        $table->integer('up_votes');
-        $table->integer('down_votes');
-        $table->text('description');
-        $table->timestamp('first_vote');
+        $table->text('payload');
+        $table->timestamp('first_vote_timestamp')->nullable();
         $table->timestamps();
 
       });
